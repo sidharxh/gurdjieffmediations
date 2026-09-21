@@ -11,234 +11,192 @@
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#E8DFCF;
-  --paper2:#DED3BE;
-  --ink:#171310;
-  --brass:#9A6E22;
-  --rust:#7A4C2A;
-  --line:#C3B79F;
-  --line2:#D5C9B1;
-  --mute:#6B6355;
-  --faint:#8E8471;
-  --deep:#16181C;
-  --deep2:#1F2228;
-  --bone:#E4DACA;
-  --gold:#C9A25A;
-  --dline:#3A3D42;
-  --dmute:#9A9285;
+  --paper:#E8DFCF; --paper2:#DED3BE; --ink:#171310;
+  --brass:#9A6E22; --rust:#7A4C2A; --line:#C3B79F; --line2:#D5C9B1;
+  --mute:#6B6355; --faint:#8E8471;
+  --deep:#16181C; --deep2:#1F2228; --bone:#E4DACA; --gold:#C9A25A; --dline:#3A3D42; --dmute:#9A9285;
   --pad:22px;
   --disp:"Jost","Avenir Next","Futura","Century Gothic","URW Gothic",system-ui,sans-serif;
   --serif:"Spectral","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --sans:"Jost","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-@media (min-width:640px){ :root{ --pad:36px; } }
-@media (min-width:900px){ :root{ --pad:48px; } }
+@media (min-width:640px){:root{--pad:36px}}
+@media (min-width:900px){:root{--pad:48px}}
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; color-scheme:light only}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 section[id]{scroll-margin-top:62px}
-svg{max-width:100%}
-img,svg{display:block}
-@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
-body{
-  margin:0; background:var(--paper); color:var(--ink);
-  font-family:var(--serif); font-size:17px; line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-}
-@media (min-width:640px){ body{font-size:18px} }
+svg{max-width:100%; display:block}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--serif); font-size:17px; line-height:1.5; -webkit-font-smoothing:antialiased}
+@media (min-width:640px){body{font-size:18px}}
+body.locked{overflow:hidden}
 
 .band{width:100%; padding:0 var(--pad); background:var(--paper); color:var(--ink)}
 .wrap{max-width:46rem; margin:0 auto}
 
-/* ---------- sticky nav ---------- */
-.nav{
-  position:sticky; top:0; z-index:30;
-  background:rgba(232,223,207,.94);
+/* nav */
+.nav{position:sticky; top:0; z-index:30; background:rgba(232,223,207,.94);
   -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
-  padding:0 var(--pad);
-}
+  border-bottom:1px solid var(--line); padding:0 var(--pad); transition:opacity .25s}
 .nav .wrap{display:flex; align-items:center; gap:14px; height:46px}
-.nav .mark{
-  font-family:var(--disp); font-size:11px; font-weight:600;
-  letter-spacing:.24em; text-transform:uppercase; color:var(--brass);
-  white-space:nowrap; margin-right:auto; text-decoration:none;
-}
-.nav a.step{
-  font-family:var(--sans); font-size:11px; font-weight:500; letter-spacing:.16em;
+.nav .mark{font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--brass); white-space:nowrap; margin-right:auto; text-decoration:none}
+.nav a.step,.nav button.step{font-family:var(--sans); font-size:11px; font-weight:500; letter-spacing:.16em;
   color:var(--mute); text-decoration:none; padding:4px 2px; white-space:nowrap;
-  border-bottom:2px solid transparent;
-}
-.nav a.step:hover{color:var(--brass); border-bottom-color:var(--brass)}
-@media (max-width:520px){ .nav .mark{font-size:10px; letter-spacing:.18em} .nav .wrap{gap:11px} }
+  border:0; border-bottom:2px solid transparent; background:none; cursor:pointer}
+.nav .step:hover{color:var(--brass); border-bottom-color:var(--brass)}
+.nav button.step{color:var(--brass); font-weight:600}
+@media (max-width:520px){.nav .mark{font-size:10px; letter-spacing:.18em} .nav .wrap{gap:11px}}
+body.quiet .nav{opacity:0; pointer-events:none}
 
-/* ---------- type ---------- */
-.eyebrow{
-  font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.26em;
-  text-transform:uppercase; color:var(--brass); margin:0 0 14px;
-}
-h1{
-  font-family:var(--disp); font-weight:400; text-transform:uppercase;
-  font-size:68px; font-size:clamp(46px,13vw,104px); line-height:.92; letter-spacing:.005em; margin:0;
-}
-h2{
-  font-family:var(--disp); font-weight:400; text-transform:uppercase;
-  font-size:38px; font-size:clamp(28px,7vw,46px); line-height:1.03; letter-spacing:.03em; margin:0;
-}
-h3{
-  font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--brass); margin:0 0 8px;
-}
-p{margin:0 0 14px}
-p:last-child{margin-bottom:0}
+/* type */
+.eyebrow{font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--brass); margin:0 0 14px}
+h1{font-family:var(--disp); font-weight:400; text-transform:uppercase; font-size:68px; font-size:clamp(46px,13vw,104px); line-height:.92; letter-spacing:.005em; margin:0}
+h2{font-family:var(--disp); font-weight:400; text-transform:uppercase; font-size:38px; font-size:clamp(28px,7vw,46px); line-height:1.03; letter-spacing:.03em; margin:0}
+h3{font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--brass); margin:0 0 8px}
+p{margin:0 0 14px} p:last-child{margin-bottom:0}
 .lede{font-size:21px; font-size:clamp(19px,4.4vw,24px); line-height:1.38; max-width:30ch}
-.meta{
-  font-family:var(--sans); font-size:11.5px; letter-spacing:.16em;
-  text-transform:uppercase; color:var(--mute); line-height:1.7;
-}
+.meta{font-family:var(--sans); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute); line-height:1.7}
 .note{font-size:15px; color:var(--mute)}
 .ital{font-style:italic; color:var(--mute)}
-
 hr.rule{border:0; height:1px; background:var(--line); margin:26px 0}
 .tick{height:3px; width:66px; background:var(--brass); margin:20px 0 16px}
 
-/* ---------- sections ---------- */
 section{padding:72px 0; padding:clamp(48px,9vw,92px) 0}
-.sec-head .num{
-  font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.24em;
-  text-transform:uppercase; color:var(--brass); display:block; margin-bottom:10px;
-}
+.sec-head .num{font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--brass); display:block; margin-bottom:10px}
 
-/* ---------- split ---------- */
+/* buttons */
+.btn{font-family:var(--disp); font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  padding:14px 24px; border:1px solid var(--brass); background:var(--brass); color:var(--paper);
+  cursor:pointer; border-radius:2px; text-decoration:none; display:inline-block; text-align:center}
+.btn.ghost{background:transparent; color:var(--brass)}
+.btn:hover{filter:brightness(1.08)}
+
+/* cover */
+.cover{min-height:100vh; min-height:100svh; display:flex; align-items:center; position:relative; overflow:hidden; padding:80px var(--pad) 70px}
+.cover .glyph{position:absolute; right:-16%; top:14%; width:min(78vw,480px); opacity:.14; pointer-events:none}
+.cover .inner{position:relative; width:100%; max-width:46rem; margin:0 auto}
+.cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:34px}
+.scrollcue{position:absolute; left:var(--pad); bottom:24px; font-family:var(--sans); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--faint)}
+
+/* split */
 .split{display:grid; gap:32px; gap:clamp(24px,5vw,40px)}
-@media (min-width:760px){
-  .split{grid-template-columns:1fr 250px; align-items:start}
-  .split.wide-fig{grid-template-columns:1fr 230px}
-}
+@media (min-width:760px){.split{grid-template-columns:1fr 250px; align-items:start}}
 .fig{margin:0; text-align:center}
-.fig svg{width:100%; height:auto; max-width:250px}
+.fig svg{width:100%; height:auto; max-width:250px; margin:0 auto}
 .fig-wide svg{max-width:100%; width:100%; height:auto}
-@media (max-width:600px){
-  .fig-wide{margin-left:calc(-0.5 * var(--pad)); margin-right:calc(-0.5 * var(--pad))}
-}
+@media (max-width:600px){.fig-wide{margin-left:calc(-0.5 * var(--pad)); margin-right:calc(-0.5 * var(--pad))}}
 
-/* ---------- steps ---------- */
+/* steps */
 ol.steps{list-style:none; margin:0; padding:0; counter-reset:s}
-ol.steps li{
-  position:relative; padding-left:34px; margin-bottom:14px; line-height:1.45;
-}
+ol.steps li{position:relative; padding-left:34px; margin-bottom:14px; line-height:1.45}
 ol.steps li:last-child{margin-bottom:0}
-ol.steps li::before{
-  counter-increment:s; content:counter(s,decimal-leading-zero);
-  position:absolute; left:0; top:.32em;
-  font-family:var(--disp); font-size:12px; font-weight:600; color:var(--brass);
-  letter-spacing:.06em;
-}
+ol.steps li::before{counter-increment:s; content:counter(s,decimal-leading-zero); position:absolute; left:0; top:.32em;
+  font-family:var(--disp); font-size:12px; font-weight:600; color:var(--brass); letter-spacing:.06em}
 ol.steps .t{font-style:italic; color:var(--faint); font-size:.88em}
 
-/* ---------- boxes ---------- */
+/* boxes */
 .box{border-top:1px solid var(--line); padding:16px 0 0; margin-top:22px}
 .box:last-of-type{border-bottom:1px solid var(--line); padding-bottom:18px}
 .box p{font-size:16px; line-height:1.48}
-@media (min-width:640px){ .box p{font-size:17px} }
-
-.warn{
-  border-left:3px solid var(--brass); background:var(--paper2);
-  padding:16px 18px; margin:22px 0 0;
-}
+@media (min-width:640px){.box p{font-size:17px}}
+.warn{border-left:3px solid var(--brass); background:var(--paper2); padding:16px 18px; margin:22px 0 0}
 .warn p{font-size:16px; line-height:1.48}
 
-/* ---------- rules grid ---------- */
 .rules{display:grid; gap:18px; margin-top:8px}
-@media (min-width:620px){ .rules{grid-template-columns:repeat(3,1fr); gap:26px} }
+@media (min-width:620px){.rules{grid-template-columns:repeat(3,1fr); gap:26px}}
 .rules p{font-size:16px; line-height:1.45}
 .rules b{font-weight:600}
 
-/* ---------- sequence ---------- */
+/* sequence */
 .seq{margin-top:6px; border-top:1px solid var(--line2)}
-.seqrow{
-  display:grid; grid-template-columns:2.4rem 1fr; gap:2px 0;
-  padding:13px 0; border-bottom:1px solid var(--line2);
-  text-decoration:none; color:inherit;
-}
+.seqrow{display:grid; grid-template-columns:2.4rem 1fr; gap:2px 0; padding:13px 0; border-bottom:1px solid var(--line2); text-decoration:none; color:inherit}
 .seqrow:hover .st{color:var(--brass)}
 .sn{font-family:var(--disp); font-size:13px; font-weight:600; color:var(--brass); letter-spacing:.08em; padding-top:.18em}
 .st{font-size:18px}
-.smeta{
-  grid-column:2; font-family:var(--sans); font-size:11.5px; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--mute);
-}
-@media (min-width:620px){
-  .seqrow{grid-template-columns:2.6rem 1fr auto; align-items:baseline}
-  .smeta{grid-column:auto; text-align:right}
-}
+.smeta{grid-column:2; font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--mute)}
+@media (min-width:620px){.seqrow{grid-template-columns:2.6rem 1fr auto; align-items:baseline} .smeta{grid-column:auto; text-align:right}}
 
-/* ---------- dark section ---------- */
+/* dark section */
 .dark{background:var(--deep); color:var(--bone)}
 .dark h3,.dark .num,.dark .eyebrow{color:var(--gold)}
 .dark .tick{background:var(--gold)}
-.dark .meta{color:var(--dmute)}
+.dark .meta,.dark .ital,.dark .note{color:var(--dmute)}
 .dark hr.rule{background:var(--dline)}
-.dark .box{border-color:var(--dline)}
-.dark .box:last-of-type{border-bottom-color:var(--dline)}
+.dark .box,.dark .box:last-of-type{border-color:var(--dline)}
 .dark .warn{background:var(--deep2); border-left-color:var(--gold)}
 .dark ol.steps li::before{color:var(--gold)}
 .dark ol.steps .t{color:#8C8478}
-.dark .ital{color:var(--dmute)}
-.dark .note{color:var(--dmute)}
+.dark .btn{border-color:var(--gold); background:var(--gold); color:var(--deep)}
 
-/* ---------- timer ---------- */
-.timer{
-  margin-top:22px; border:1px solid var(--dline); background:var(--deep2);
-  padding:18px; display:grid; gap:14px; justify-items:start;
-}
-.timer .lbl{
-  font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--gold);
-}
-.timer button{
-  font-family:var(--disp); font-size:12px; font-weight:600; letter-spacing:.18em;
-  text-transform:uppercase; color:var(--deep); background:var(--gold);
-  border:0; padding:12px 22px; cursor:pointer; border-radius:2px;
-}
-.timer button:hover{background:#DDB670}
-.timer button[disabled]{opacity:.45; cursor:default}
-.timer .read{
-  font-family:var(--sans); font-size:13px; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--dmute);
-}
-.timer.fire{background:var(--gold); border-color:var(--gold)}
-.timer.fire .lbl,.timer.fire .read{color:#16181C}
-.timer.fire button{background:var(--deep); color:var(--gold)}
+/* rhythm player */
+.player{margin:24px 0 30px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:18px 0; display:grid; gap:15px}
+.prow{display:flex; flex-wrap:wrap; align-items:center; gap:12px}
+.seg{display:inline-flex; border:1px solid var(--line); border-radius:2px; overflow:hidden}
+.seg button{font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+  padding:10px 15px; background:transparent; border:0; border-right:1px solid var(--line); color:var(--mute); cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--brass); color:var(--paper)}
+.pplay{font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  padding:10px 20px; border:1px solid var(--brass); background:var(--brass); color:var(--paper); cursor:pointer; border-radius:2px}
+.pplay[data-on="1"]{background:transparent; color:var(--brass)}
+.count{font-family:var(--sans); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--mute); margin-left:auto}
+.count b{font-family:var(--disp); color:var(--brass); font-size:16px; font-weight:600; letter-spacing:.02em}
+.phint{font-size:14.5px; color:var(--mute); margin:0}
+@media (max-width:520px){.count{margin-left:0; width:100%}}
 
-/* ---------- refs / footer ---------- */
+/* stop launcher */
+.timer{margin-top:24px; border:1px solid var(--dline); background:var(--deep2); padding:20px; display:grid; gap:14px; justify-items:start}
+.timer .lbl{font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--gold)}
+.timer .read{font-family:var(--sans); font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--dmute); line-height:1.6}
+
+/* refs + footer */
 .refs{font-size:14px; line-height:1.5; color:#4A433A}
-.refs li{margin-bottom:9px; padding-left:22px; position:relative; list-style:none}
 .refs ol{margin:0; padding:0; counter-reset:r}
-.refs li::before{
-  counter-increment:r; content:counter(r); position:absolute; left:0; top:.1em;
-  font-family:var(--disp); font-weight:600; color:var(--brass); font-size:12px;
-}
-.refs i{font-style:italic}
-footer{padding:34px var(--pad) 60px; border-top:1px solid var(--line)}
+.refs li{margin-bottom:9px; padding-left:22px; position:relative; list-style:none}
+.refs li::before{counter-increment:r; content:counter(r); position:absolute; left:0; top:.1em; font-family:var(--disp); font-weight:600; color:var(--brass); font-size:12px}
+footer{padding:34px var(--pad) 64px; border-top:1px solid var(--line)}
 footer .wrap{display:flex; flex-wrap:wrap; gap:10px 20px; justify-content:space-between}
 footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
 
-/* ---------- cover geometry ---------- */
-.cover{position:relative; overflow:hidden}
-.cover .glyph{
-  position:absolute; right:-14%; top:6%; width:min(72vw,460px); opacity:.14; pointer-events:none;
-}
-.cover .inner{position:relative}
+/* ---------- runner overlay ---------- */
+.run{position:fixed; inset:0; z-index:100; display:none; flex-direction:column;
+  background:var(--paper); color:var(--ink);
+  padding:calc(18px + env(safe-area-inset-top)) var(--pad) calc(22px + env(safe-area-inset-bottom));
+  transition:background .18s linear, color .18s linear}
+.run.on{display:flex}
+.run.bgdark{background:var(--deep); color:var(--bone)}
+.run.bggold{background:var(--gold); color:#16181C}
+.run-top{display:flex; justify-content:space-between; align-items:center; gap:14px}
+.run-m{font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--brass)}
+.run.bgdark .run-m{color:var(--gold)}
+.run.bggold .run-m{color:#16181C}
+.run-x{background:none; border:0; font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.18em;
+  text-transform:uppercase; color:inherit; opacity:.55; cursor:pointer; padding:6px}
+.run-x:hover{opacity:1}
+.run-body{flex:1; display:flex; align-items:center; padding:24px 0}
+.run-s{font-size:28px; font-size:clamp(26px,6.2vw,48px); line-height:1.22; max-width:19ch; margin:0; font-weight:400}
+.run.bggold .run-s{font-family:var(--disp); text-transform:uppercase; letter-spacing:.02em; line-height:1.06}
+.run-foot{display:grid; gap:16px}
+.run-bar{height:2px; background:rgba(23,19,16,.16)}
+.run.bgdark .run-bar{background:rgba(228,218,202,.2)}
+.run.bggold .run-bar{background:rgba(22,24,28,.22)}
+.run-fill{height:100%; width:0; background:var(--brass)}
+.run.bgdark .run-fill{background:var(--gold)}
+.run.bggold .run-fill{background:#16181C}
+.run-ctl{display:flex; justify-content:space-between; align-items:center; gap:14px}
+.run-ctl button{font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+  background:none; border:1px solid currentColor; color:inherit; padding:11px 20px; cursor:pointer; border-radius:2px}
+.run-ctl button:hover{opacity:.72}
+.run-t{font-family:var(--sans); font-size:12.5px; letter-spacing:.16em; opacity:.6; font-variant-numeric:tabular-nums}
 
-/* ---------- print ---------- */
 @media print{
-  .nav,.timer{display:none}
-  body{font-size:10.5pt; background:#E8DFCF}
+  .nav,.timer,.player,.cta,.scrollcue,.run{display:none !important}
+  body{font-size:10.5pt; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+  .cover{min-height:0; padding:0}
   section{padding:0; page-break-after:always}
   section:last-of-type{page-break-after:auto}
-  .dark{background:#16181C !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
-  body{-webkit-print-color-adjust:exact; print-color-adjust:exact}
 }
 </style>
 </head>
@@ -251,24 +209,33 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
     <a class="step" href="#m2">02</a>
     <a class="step" href="#m3">03</a>
     <a class="step" href="#m4">04</a>
+    <button class="step" type="button" data-run="full">Run</button>
   </div>
 </nav>
 
 <!-- ============ COVER ============ -->
-<div class="band cover" id="top">
+<header class="band cover" id="top">
   <svg class="glyph" viewBox="0 0 200 200" aria-hidden="true">
     <circle cx="100" cy="100" r="80" fill="none" stroke="#7A5310" stroke-width="1.4"/>
     <polygon points="169.28,140 30.72,140 100,20" fill="none" stroke="#7A5310" stroke-width="1.4"/>
     <polygon points="151.42,38.72 127.36,175.18 178.79,86.11 48.58,38.72 72.64,175.18 21.21,86.11" fill="none" stroke="#7A5310" stroke-width="1.4"/>
   </svg>
-  <section class="wrap inner">
+  <div class="inner">
     <p class="eyebrow">A Task Sheet &middot; Four Movements &middot; Nine Minutes</p>
     <h1>Still<br>Moving</h1>
     <div class="tick"></div>
     <p class="lede">Four movements that stop the mind. Inspired by the sacred dances of G. I. Gurdjieff.</p>
+    <div class="cta">
+      <button class="btn" type="button" data-run="full">Run the sequence &middot; 9 min</button>
+      <a class="btn ghost" href="#premise">Read it first</a>
+    </div>
+  </div>
+  <span class="scrollcue">Scroll</span>
+</header>
 
-    <hr class="rule">
-
+<!-- ============ PREMISE ============ -->
+<div class="band">
+  <section class="wrap" id="premise">
     <h3>The Problem</h3>
     <p>You cannot relax your way out of a busy mind. Trying to calm down is one more item on the list. The part of you doing the calming is the part that will not stop.</p>
 
@@ -308,7 +275,6 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
       <p class="meta">90 Seconds &middot; Seated &middot; Anywhere, Including a Desk</p>
     </div>
     <hr class="rule">
-
     <div class="split">
       <div>
         <h3>Setup</h3>
@@ -325,52 +291,27 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
       <figure class="fig">
         <svg viewBox="0 0 180 196" role="img" aria-label="Figure with three attention points marked: crown, right hand, left foot">
           <g fill="none" stroke="#6E6553" stroke-width="1.8" stroke-linecap="round">
-            <circle cx="90" cy="42" r="12"/>
-            <line x1="90" y1="54" x2="90" y2="62"/>
-            <line x1="66" y1="66" x2="114" y2="66"/>
-            <line x1="90" y1="66" x2="90" y2="108"/>
-            <line x1="66" y1="66" x2="60" y2="104"/>
-            <line x1="114" y1="66" x2="120" y2="104"/>
+            <circle cx="90" cy="42" r="12"/><line x1="90" y1="54" x2="90" y2="62"/>
+            <line x1="66" y1="66" x2="114" y2="66"/><line x1="90" y1="66" x2="90" y2="108"/>
+            <line x1="66" y1="66" x2="60" y2="104"/><line x1="114" y1="66" x2="120" y2="104"/>
             <line x1="72" y1="108" x2="108" y2="108"/>
-            <line x1="72" y1="108" x2="70" y2="154"/>
-            <line x1="108" y1="108" x2="110" y2="154"/>
-            <line x1="70" y1="154" x2="70" y2="168"/>
-            <line x1="110" y1="154" x2="110" y2="168"/>
-            <line x1="62" y1="168" x2="78" y2="168"/>
-            <line x1="102" y1="168" x2="118" y2="168"/>
+            <line x1="72" y1="108" x2="70" y2="154"/><line x1="108" y1="108" x2="110" y2="154"/>
+            <line x1="70" y1="154" x2="70" y2="168"/><line x1="110" y1="154" x2="110" y2="168"/>
+            <line x1="62" y1="168" x2="78" y2="168"/><line x1="102" y1="168" x2="118" y2="168"/>
           </g>
-          <g fill="#9A6E22">
-            <circle cx="90" cy="28" r="5.4"/>
-            <circle cx="60" cy="106" r="5.4"/>
-            <circle cx="110" cy="168" r="5.4"/>
-          </g>
+          <g fill="#9A6E22"><circle cx="90" cy="28" r="5.4"/><circle cx="60" cy="106" r="5.4"/><circle cx="110" cy="168" r="5.4"/></g>
           <g stroke="#9A6E22" stroke-width="1" fill="none">
-            <polyline points="90,21 90,13 132,13"/>
-            <line x1="53" y1="106" x2="22" y2="106"/>
-            <polyline points="116,168 134,168 134,182"/>
+            <polyline points="90,21 90,13 132,13"/><line x1="53" y1="106" x2="22" y2="106"/><polyline points="116,168 134,168 134,182"/>
           </g>
           <g fill="#9A6E22" font-family="Jost, Helvetica, sans-serif" font-size="8" letter-spacing="1.1">
-            <text x="134" y="16">CROWN</text>
-            <text x="0" y="99">RIGHT</text>
-            <text x="0" y="110">HAND</text>
-            <text x="96" y="193">LEFT FOOT</text>
+            <text x="134" y="16">CROWN</text><text x="0" y="99">RIGHT</text><text x="0" y="110">HAND</text><text x="96" y="193">LEFT FOOT</text>
           </g>
         </svg>
       </figure>
     </div>
-
-    <div class="box">
-      <h3>What Happens</h3>
-      <p>Three live sensations is more than the talking part of your mind can carry. It goes quiet without being asked to.</p>
-    </div>
-    <div class="box">
-      <h3>If It Goes Wrong</h3>
-      <p>If you are visualising your hand, you are still thinking. Drop out of the image and into the raw feeling of weight and skin.</p>
-    </div>
-    <div class="box">
-      <h3>When To Use It</h3>
-      <p>At your desk, on a call, in the four minutes between meetings. Nothing moves, so nobody sees you doing it.</p>
-    </div>
+    <div class="box"><h3>What Happens</h3><p>Three live sensations is more than the talking part of your mind can carry. It goes quiet without being asked to.</p></div>
+    <div class="box"><h3>If It Goes Wrong</h3><p>If you are visualising your hand, you are still thinking. Drop out of the image and into the raw feeling of weight and skin.</p></div>
+    <div class="box"><h3>When To Use It</h3><p>At your desk, on a call, in the four minutes between meetings. Nothing moves, so nobody sees you doing it.</p></div>
   </section>
 </div>
 
@@ -384,52 +325,64 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
       <p class="meta">3 Minutes &middot; Standing &middot; Room Enough to Sway</p>
     </div>
     <hr class="rule">
-
     <p class="ital">This is the hard one. Being bad at it is the mechanism, not a side effect.</p>
 
-    <figure class="fig fig-wide" style="margin:26px 0 30px">
-      <svg viewBox="0 0 358 142" role="img" aria-label="Rhythm grid: arms accent every three beats, feet every four, meeting again at twelve">
+    <figure class="fig fig-wide" style="margin:26px 0 0">
+      <svg id="grid" viewBox="0 0 358 142" role="img" aria-label="Rhythm grid: arms accent every three beats, feet every four, meeting again at twelve">
         <text x="0" y="12" font-family="Jost, Helvetica, sans-serif" font-size="9.6" letter-spacing="1.6" fill="#6B6355">ARMS IN 3</text>
         <line x1="14" y1="32" x2="344" y2="32" stroke="#C3B79F" stroke-width="1"/>
-        <g>
-          <circle cx="14"  cy="32" r="7" fill="#9A6E22"/>
-          <circle cx="44"  cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="74"  cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="104" cy="32" r="7" fill="#9A6E22"/>
-          <circle cx="134" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="164" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="194" cy="32" r="7" fill="#9A6E22"/>
-          <circle cx="224" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="254" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="284" cy="32" r="7" fill="#9A6E22"/>
-          <circle cx="314" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="344" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
+        <g id="rowA">
+          <circle id="r1b0"  cx="14"  cy="32" r="7"   fill="#9A6E22"/>
+          <circle id="r1b1"  cx="44"  cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r1b2"  cx="74"  cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r1b3"  cx="104" cy="32" r="7"   fill="#9A6E22"/>
+          <circle id="r1b4"  cx="134" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r1b5"  cx="164" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r1b6"  cx="194" cy="32" r="7"   fill="#9A6E22"/>
+          <circle id="r1b7"  cx="224" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r1b8"  cx="254" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r1b9"  cx="284" cy="32" r="7"   fill="#9A6E22"/>
+          <circle id="r1b10" cx="314" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r1b11" cx="344" cy="32" r="3.2" fill="none" stroke="#B7A98E"/>
         </g>
         <text x="0" y="72" font-family="Jost, Helvetica, sans-serif" font-size="9.6" letter-spacing="1.6" fill="#6B6355">FEET IN 4</text>
         <line x1="14" y1="92" x2="344" y2="92" stroke="#C3B79F" stroke-width="1"/>
-        <g>
-          <circle cx="14"  cy="92" r="7" fill="#7A4C2A"/>
-          <circle cx="44"  cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="74"  cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="104" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="134" cy="92" r="7" fill="#7A4C2A"/>
-          <circle cx="164" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="194" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="224" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="254" cy="92" r="7" fill="#7A4C2A"/>
-          <circle cx="284" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="314" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
-          <circle cx="344" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
+        <g id="rowB">
+          <circle id="r2b0"  cx="14"  cy="92" r="7"   fill="#7A4C2A"/>
+          <circle id="r2b1"  cx="44"  cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r2b2"  cx="74"  cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r2b3"  cx="104" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r2b4"  cx="134" cy="92" r="7"   fill="#7A4C2A"/>
+          <circle id="r2b5"  cx="164" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r2b6"  cx="194" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r2b7"  cx="224" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r2b8"  cx="254" cy="92" r="7"   fill="#7A4C2A"/>
+          <circle id="r2b9"  cx="284" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r2b10" cx="314" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
+          <circle id="r2b11" cx="344" cy="92" r="3.2" fill="none" stroke="#B7A98E"/>
         </g>
         <line x1="14" y1="18" x2="14" y2="106" stroke="#9A6E22" stroke-width="1" stroke-dasharray="2,3"/>
+        <line id="phead" x1="14" y1="16" x2="14" y2="108" stroke="#9A6E22" stroke-width="1.6" opacity="0"/>
         <polyline points="14,114 14,120 344,120 344,114" fill="none" stroke="#6B6355" stroke-width="1"/>
         <text x="179" y="136" text-anchor="middle" font-family="Jost, Helvetica, sans-serif" font-size="9" letter-spacing="1.4" fill="#6B6355">TWELVE COUNTS, THEN THEY MEET AGAIN</text>
       </svg>
     </figure>
 
+    <div class="player">
+      <div class="prow">
+        <button class="pplay" id="pPlay" type="button" data-on="0">Play</button>
+        <div class="seg" role="group" aria-label="Which limbs to hear">
+          <button type="button" data-mode="feet" aria-pressed="false">Feet</button>
+          <button type="button" data-mode="arms" aria-pressed="false">Arms</button>
+          <button type="button" data-mode="both" aria-pressed="true">Both</button>
+        </div>
+        <span class="count" id="pCount">Feet <b>&middot;</b> &nbsp; Arms <b>&middot;</b></span>
+      </div>
+      <p class="phint">Low beat is the feet, counting in four. High beat is the arms, counting in three. Learn one at a time, then put them together. Sound on.</p>
+    </div>
+
     <h3>Setup</h3>
     <p>Stand. Feet hip width. Weight even. Arms loose at your sides.</p>
-
     <h3 style="margin-top:26px">Do</h3>
     <ol class="steps">
       <li>Feet only. Shift weight left, right, left, right. Count out loud: 1 2 3 4. Slow. Eight cycles.</li>
@@ -438,19 +391,9 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
       <li>Run twelve counts. Then twelve more. Then twelve more.</li>
       <li>Stop wherever you are. Stand still for thirty seconds.</li>
     </ol>
-
-    <div class="box">
-      <h3>What Happens</h3>
-      <p>One counting voice cannot hold two meters. The voice quits. The gap it leaves behind is the reason for this page.</p>
-    </div>
-    <div class="box">
-      <h3>If It Goes Wrong</h3>
-      <p>You will lose it constantly. Do not restart from the top. Rejoin at the next clean count and keep going.</p>
-    </div>
-    <div class="box">
-      <h3>When To Use It</h3>
-      <p>When your head is loud and looping. Counting out loud takes the channel the loop runs on.</p>
-    </div>
+    <div class="box"><h3>What Happens</h3><p>One counting voice cannot hold two meters. The voice quits. The gap it leaves behind is the reason for this page.</p></div>
+    <div class="box"><h3>If It Goes Wrong</h3><p>You will lose it constantly. Do not restart from the top. Rejoin at the next clean count and keep going.</p></div>
+    <div class="box"><h3>When To Use It</h3><p>When your head is loud and looping. Counting out loud takes the channel the loop runs on.</p></div>
   </section>
 </div>
 
@@ -464,7 +407,6 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
       <p class="meta">2 Minutes &middot; Standing &middot; Clear Floor, Near a Wall</p>
     </div>
     <hr class="rule">
-
     <div class="warn">
       <p><b style="color:#C9A25A">THE ONE RULE.</b> The signal must come from outside you. A timer, an alarm, another person. Choose the moment yourself and you will choose a comfortable posture, and nothing will happen.</p>
     </div>
@@ -489,8 +431,7 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
             <polyline points="8,171 8,181 22,181"/><polyline points="122,171 122,181 108,181"/>
           </g>
           <g fill="none" stroke="#E4DACA" stroke-width="1.8" stroke-linecap="round">
-            <circle cx="66" cy="34" r="12"/>
-            <line x1="66" y1="46" x2="66" y2="54"/>
+            <circle cx="66" cy="34" r="12"/><line x1="66" y1="46" x2="66" y2="54"/>
             <line x1="66" y1="56" x2="64" y2="102"/>
             <line x1="66" y1="60" x2="40" y2="30"/><line x1="40" y1="30" x2="34" y2="16"/>
             <line x1="66" y1="60" x2="96" y2="80"/><line x1="96" y1="80" x2="104" y2="96"/>
@@ -505,24 +446,15 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
       </figure>
     </div>
 
-    <div class="timer" id="timer">
-      <span class="lbl" id="tLbl">The Outside Signal</span>
-      <button id="tBtn" type="button">Start</button>
-      <span class="read" id="tRead">Fires once at a random moment within thirty seconds. Sound on.</span>
+    <div class="timer">
+      <span class="lbl">The Outside Signal</span>
+      <button class="btn" type="button" data-run="stop">Run the stop</button>
+      <span class="read">Goes full screen. Move until it catches you, at a random moment within thirty seconds. Sound and vibration on.</span>
     </div>
 
-    <div class="box">
-      <h3>What Happens</h3>
-      <p>Body and thought run as one machine. Freeze the body without warning and thought loses its partner mid sentence. The silence that drops in was not produced. It was uncovered.</p>
-    </div>
-    <div class="box">
-      <h3>Safety</h3>
-      <p>Keep both feet on the floor. If your balance is poor, do it seated and freeze seated. Come out of anything that pulls on a joint.</p>
-    </div>
-    <div class="box">
-      <h3>When To Use It</h3>
-      <p>When you have held one shape for hours and cannot say why you are tense.</p>
-    </div>
+    <div class="box"><h3>What Happens</h3><p>Body and thought run as one machine. Freeze the body without warning and thought loses its partner mid sentence. The silence that drops in was not produced. It was uncovered.</p></div>
+    <div class="box"><h3>Safety</h3><p>Keep both feet on the floor. If your balance is poor, do it seated and freeze seated. Come out of anything that pulls on a joint.</p></div>
+    <div class="box"><h3>When To Use It</h3><p>When you have held one shape for hours and cannot say why you are tense.</p></div>
   </section>
 </div>
 
@@ -536,7 +468,6 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
       <p class="meta">60 Seconds &middot; Standing or Seated &middot; No Preparation</p>
     </div>
     <hr class="rule">
-
     <div class="split">
       <div>
         <h3>Do</h3>
@@ -555,14 +486,9 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
         </svg>
       </figure>
     </div>
-
-    <div class="box">
-      <h3>The Whole Idea</h3>
-      <p>The first three movements are things you do. This one is not. They exist to tire out the part of you that insists on doing, so that this page has somewhere to land. You are not manufacturing a state. You are noticing one that was sitting underneath the noise the entire time.</p>
-    </div>
+    <div class="box"><h3>The Whole Idea</h3><p>The first three movements are things you do. This one is not. They exist to tire out the part of you that insists on doing, so that this page has somewhere to land. You are not manufacturing a state. You are noticing one that was sitting underneath the noise the entire time.</p></div>
 
     <hr class="rule" style="margin-top:34px">
-
     <h3>Sources</h3>
     <div class="refs">
       <ol>
@@ -572,7 +498,6 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
         <li>The six Obligatories are the preliminary exercises in attention and coordination, taught before all else. <i>Gurdjieff's Movements and Sacred Dances</i>, gurdjieffandfourthway.org</li>
       </ol>
     </div>
-
     <div class="warn" style="margin-top:26px">
       <p>The Movements are transmitted in person by teachers in the Gurdjieff lineage, with hands on correction. These pages are inspired by that work. They are not it, and they are not a substitute for it. Formal research on the Movements is limited. Nothing here is medical advice.</p>
     </div>
@@ -586,56 +511,270 @@ footer span{font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-
   </div>
 </footer>
 
+<!-- ============ RUNNER ============ -->
+<div class="run" id="run" role="dialog" aria-modal="true" aria-label="Guided sequence">
+  <div class="run-top">
+    <span class="run-m" id="runM">Still Moving</span>
+    <button class="run-x" id="runX" type="button">Exit</button>
+  </div>
+  <div class="run-body">
+    <p class="run-s" id="runS" aria-live="polite">Ready.</p>
+  </div>
+  <div class="run-foot">
+    <div class="run-bar"><div class="run-fill" id="runFill"></div></div>
+    <div class="run-ctl">
+      <button id="runP" type="button">Pause</button>
+      <span class="run-t" id="runT">0:00</span>
+      <button id="runN" type="button">Skip</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
-  var btn=document.getElementById('tBtn'),
-      read=document.getElementById('tRead'),
-      lbl=document.getElementById('tLbl'),
-      box=document.getElementById('timer'),
-      handle=null, tick=null;
+'use strict';
 
-  function beep(){
-    try{
-      var Ctx=window.AudioContext||window.webkitAudioContext;
-      if(!Ctx) return;
-      var ac=new Ctx(), o=ac.createOscillator(), g=ac.createGain();
-      o.type='sine'; o.frequency.value=660;
-      g.gain.setValueAtTime(0.0001, ac.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.35, ac.currentTime+0.01);
-      g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime+1.1);
-      o.connect(g); g.connect(ac.destination);
-      o.start(); o.stop(ac.currentTime+1.2);
-      setTimeout(function(){ try{ac.close();}catch(e){} }, 1600);
-    }catch(e){}
+/* ================= audio ================= */
+var AC=null;
+function ctx(){
+  if(!AC){
+    var C=window.AudioContext||window.webkitAudioContext;
+    if(!C) return null;
+    try{ AC=new C(); }catch(e){ return null; }
   }
+  if(AC.state==='suspended'){ try{ AC.resume(); }catch(e){} }
+  return AC;
+}
+function tone(at,freq,dur,vol,type){
+  var ac=ctx(); if(!ac) return;
+  var o=ac.createOscillator(), g=ac.createGain();
+  o.type=type||'sine';
+  o.frequency.setValueAtTime(freq,at);
+  g.gain.setValueAtTime(0.0001,at);
+  g.gain.exponentialRampToValueAtTime(Math.max(vol,0.0002),at+0.008);
+  g.gain.exponentialRampToValueAtTime(0.0001,at+dur);
+  o.connect(g); g.connect(ac.destination);
+  o.start(at); o.stop(at+dur+0.04);
+}
+function chime(){ var ac=ctx(); if(!ac) return; var t=ac.currentTime+0.02; tone(t,523,0.45,0.13); tone(t+0.085,784,0.5,0.10); }
+function bang(){
+  var ac=ctx(); if(!ac) return; var t=ac.currentTime+0.02;
+  tone(t,165,0.95,0.40); tone(t,880,0.30,0.30); tone(t+0.24,880,0.30,0.22);
+  if(navigator.vibrate){ try{ navigator.vibrate([250,90,250]); }catch(e){} }
+}
 
-  function reset(){
-    clearTimeout(handle); clearInterval(tick);
-    box.classList.remove('fire');
-    lbl.textContent='The Outside Signal';
-    btn.textContent='Start'; btn.disabled=false;
-    read.textContent='Fires once at a random moment within thirty seconds. Sound on.';
+/* ================= rhythm engine ================= */
+var SPB=1.0, LOOK=0.12;
+var R={on:false,mode:'both',beat:0,next:0,t0:0,q:[],tid:null};
+function rTick(){
+  var ac=ctx(); if(!ac) return;
+  while(R.next < ac.currentTime + LOOK){
+    var i=R.beat%12;
+    var feet=(R.mode!=='arms') && (i%4===0);
+    var arms=(R.mode!=='feet') && (i%3===0);
+    if(feet) tone(R.next,168,0.20,0.50);
+    if(arms) tone(R.next,784,0.11,0.30);
+    if(!feet && !arms) tone(R.next,1500,0.025,0.045,'square');
+    R.q.push({b:i,t:R.next});
+    if(R.q.length>64) R.q.shift();
+    R.next+=SPB; R.beat++;
   }
+}
+function rStart(mode){
+  var ac=ctx(); if(!ac) return false;
+  if(mode) R.mode=mode;
+  if(R.on) return true;
+  R.on=true; R.beat=0; R.q=[];
+  R.t0=ac.currentTime+0.18; R.next=R.t0;
+  rTick();
+  R.tid=setInterval(rTick,25);
+  return true;
+}
+function rStop(){ R.on=false; if(R.tid){ clearInterval(R.tid); R.tid=null; } R.q=[]; }
+function rPos(){ var ac=ctx(); if(!ac||!R.on) return -1; return (ac.currentTime-R.t0)/SPB; }
+function rDrain(){
+  var ac=ctx(); if(!ac) return [];
+  var out=[], c=ac.currentTime;
+  while(R.q.length && R.q[0].t<=c){ out.push(R.q.shift().b); }
+  return out;
+}
 
-  function fire(){
-    clearInterval(tick);
-    box.classList.add('fire');
-    lbl.textContent='Stop';
-    read.textContent='Freeze exactly as you are. Hold twenty seconds. Do not adjust.';
-    beep();
-    if(navigator.vibrate){ try{ navigator.vibrate([220,90,220]); }catch(e){} }
-    btn.textContent='Again'; btn.disabled=false;
+/* ================= section 02 player ================= */
+var stopWidget=function(){};
+(function(){
+  var grid=document.getElementById('grid');
+  if(!grid) return;
+  var pPlay=document.getElementById('pPlay'),
+      pCount=document.getElementById('pCount'),
+      phead=document.getElementById('phead'),
+      segs=document.querySelectorAll('.seg [data-mode]');
+  var base={}, waf=null, IDLE='Feet <b>&middot;</b> &nbsp; Arms <b>&middot;</b>';
+
+  for(var i=0;i<12;i++){
+    ['r1b','r2b'].forEach(function(p){
+      var el=document.getElementById(p+i);
+      if(el) base[p+i]=parseFloat(el.getAttribute('r'));
+    });
   }
-
-  btn.addEventListener('click', function(){
-    if(box.classList.contains('fire')){ reset(); return; }
-    var wait=10+Math.floor(Math.random()*21);
-    box.classList.remove('fire');
-    lbl.textContent='Move Until the Signal';
-    read.textContent='Walk, sway, reach. No pattern. Keep going.';
-    btn.textContent='Waiting'; btn.disabled=true;
-    handle=setTimeout(fire, wait*1000);
+  function pulse(i){
+    ['r1b','r2b'].forEach(function(p){
+      var el=document.getElementById(p+i); if(!el) return;
+      var b=base[p+i]||3.2;
+      el.setAttribute('r',(b*2).toFixed(2));
+      setTimeout(function(){ el.setAttribute('r',b); },150);
+    });
+    pCount.innerHTML='Feet <b>'+((i%4)+1)+'</b> &nbsp; Arms <b>'+((i%3)+1)+'</b>';
+  }
+  function loop(){
+    if(!R.on){ return; }
+    var f=rDrain();
+    for(var k=0;k<f.length;k++) pulse(f[k]);
+    var pos=rPos();
+    if(pos>=0){
+      var x=(14+((pos%12)*30)).toFixed(1);
+      phead.setAttribute('x1',x); phead.setAttribute('x2',x); phead.setAttribute('opacity','0.85');
+    }
+    waf=requestAnimationFrame(loop);
+  }
+  stopWidget=function(){
+    rStop();
+    if(waf) cancelAnimationFrame(waf);
+    waf=null;
+    pPlay.textContent='Play'; pPlay.setAttribute('data-on','0');
+    phead.setAttribute('opacity','0');
+    pCount.innerHTML=IDLE;
+  };
+  pPlay.addEventListener('click',function(){
+    if(R.on){ stopWidget(); return; }
+    if(!rStart()){ pPlay.textContent='No audio'; return; }
+    pPlay.textContent='Stop'; pPlay.setAttribute('data-on','1');
+    waf=requestAnimationFrame(loop);
   });
+  Array.prototype.forEach.call(segs,function(b){
+    b.addEventListener('click',function(){
+      Array.prototype.forEach.call(segs,function(o){ o.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      R.mode=b.getAttribute('data-mode');
+    });
+  });
+})();
+
+/* ================= runner ================= */
+var M1='One \u00b7 Two Places At Once', M2='Two \u00b7 Three And Four',
+    M3='Three \u00b7 The Stop', M4='Four \u00b7 The Standing Sit';
+
+var FULL=[
+ {m:'Still Moving', t:20, s:'Nine minutes. Four movements. Do them badly. Do not chase calm.'},
+ {m:M1, t:15, s:'Sit. Feet flat on the floor. Hands on your thighs. Eyes open, aimed at the floor.'},
+ {m:M1, t:25, s:'Attention in your right hand. Not a picture of it. Its weight, warmth, pulse.'},
+ {m:M1, t:25, s:'Keep the right hand. Add the left foot. Hold both at once.'},
+ {m:M1, t:35, s:'Keep both. Add the crown of your head. Three at once.'},
+ {m:M1, t:25, s:'Stop. Hands still. Do nothing at all.'},
+ {m:M2, t:18, s:'Stand. Feet hip width. Weight even. Arms loose at your sides.'},
+ {m:M2, t:45, s:'Feet only. Left, right, left, right. Count out loud: 1 2 3 4.', click:'feet'},
+ {m:M2, t:45, s:'Arms only. One arc forward, up and down across three counts. Count out loud: 1 2 3.', click:'arms'},
+ {m:M2, t:85, s:'Now both. Feet in four. Arms in three. They meet every twelve.', click:'both'},
+ {m:M2, t:35, s:'Stop wherever you are. Stand still.'},
+ {m:M3, t:12, s:'Stand near a wall. Clear the floor around you.'},
+ {m:M3, rand:true, bg:'dark', s:'Move. Walk, sway, reach. No pattern. Keep going.'},
+ {m:M3, t:20, bg:'gold', bang:true, s:'Freeze. Exactly as caught. Do not adjust.'},
+ {m:M3, t:14, s:'Release slowly. Do not collapse.'},
+ {m:M4, t:60, s:'Stand. Or sit. Do nothing. Do not fix your posture. Do not try to meditate.'},
+ {m:'', t:12, s:'Done. Walk away without grading it.'}
+];
+var STOPONLY=[
+ {m:'The Stop', t:10, s:'Stand near a wall. Clear the floor around you.'},
+ {m:'The Stop', rand:true, bg:'dark', s:'Move. Walk, sway, reach. No pattern. Keep going.'},
+ {m:'The Stop', t:20, bg:'gold', bang:true, s:'Freeze. Exactly as caught. Do not adjust.'},
+ {m:'The Stop', t:12, s:'Release slowly. Do not collapse.'}
+];
+
+var run=document.getElementById('run'),
+    runM=document.getElementById('runM'), runS=document.getElementById('runS'),
+    runFill=document.getElementById('runFill'), runT=document.getElementById('runT'),
+    runP=document.getElementById('runP'), runN=document.getElementById('runN'),
+    runX=document.getElementById('runX');
+
+var q=[], qi=-1, el=0, len=0, paused=false, last=0, af=null, open=false;
+
+function fmt(s){ s=Math.max(0,s); var m=Math.floor(s/60); var r=s%60; return m+':'+(r<10?'0':'')+r; }
+
+function step(){
+  qi++;
+  if(qi>=q.length){ closeRun(); return; }
+  var s=q[qi];
+  el=0;
+  len=(s.rand ? (10+Math.random()*20) : s.t)*1000;
+  runM.textContent=s.m||'Still Moving';
+  runS.textContent=s.s;
+  run.classList.remove('bgdark','bggold');
+  if(s.bg==='dark') run.classList.add('bgdark');
+  if(s.bg==='gold') run.classList.add('bggold');
+  rStop();
+  if(s.click) rStart(s.click);
+  if(s.bang) bang(); else chime();
+  runFill.style.width='0%';
+  runT.textContent=fmt(Math.ceil(len/1000));
+}
+function loop(ts){
+  if(!open) return;
+  if(!last) last=ts;
+  var dt=ts-last; last=ts;
+  if(!paused){
+    el+=dt;
+    if(el>=len){ step(); }
+    else{
+      runFill.style.width=(el/len*100).toFixed(2)+'%';
+      runT.textContent=fmt(Math.ceil((len-el)/1000));
+    }
+  }
+  af=requestAnimationFrame(loop);
+}
+function openRun(list){
+  stopWidget();
+  q=list; qi=-1; open=true; paused=false; last=0;
+  runP.textContent='Pause';
+  run.classList.add('on'); document.body.classList.add('locked');
+  ctx();
+  step();
+  af=requestAnimationFrame(loop);
+}
+function closeRun(){
+  open=false;
+  if(af) cancelAnimationFrame(af);
+  af=null; rStop();
+  run.classList.remove('on','bgdark','bggold');
+  document.body.classList.remove('locked');
+}
+runX.addEventListener('click',closeRun);
+runN.addEventListener('click',function(){ if(open) step(); });
+runP.addEventListener('click',function(){
+  if(!open) return;
+  paused=!paused;
+  runP.textContent = paused ? 'Resume' : 'Pause';
+  if(paused){ rStop(); }
+  else{ var s=q[qi]; if(s && s.click) rStart(s.click); }
+});
+document.addEventListener('keydown',function(e){
+  if(!open) return;
+  if(e.key==='Escape'){ closeRun(); }
+  else if(e.key===' '){ e.preventDefault(); runP.click(); }
+  else if(e.key==='ArrowRight'){ step(); }
+});
+Array.prototype.forEach.call(document.querySelectorAll('[data-run]'),function(b){
+  b.addEventListener('click',function(){
+    openRun(b.getAttribute('data-run')==='stop' ? STOPONLY : FULL);
+  });
+});
+
+/* ================= let the interface stop ================= */
+var m4=document.getElementById('m4');
+if(m4 && 'IntersectionObserver' in window){
+  new IntersectionObserver(function(es){
+    document.body.classList.toggle('quiet', es[0].isIntersecting);
+  },{threshold:0, rootMargin:'-25% 0px -25% 0px'}).observe(m4);
+}
+
 })();
 </script>
 
